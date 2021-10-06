@@ -13,7 +13,7 @@ public class Instructor implements Module {
     public void uploadProject(Course course, Project project){
 
     }
-    public List<SubmittedProject>(Project project){
+    public List<SubmittedProject> getSubmittedProjects(Project project){
         return submittedProjects;
     }
     public void uploadFeedback(SubmittedProject project, Feedback feedback){
