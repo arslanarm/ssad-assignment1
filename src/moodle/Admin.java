@@ -18,7 +18,7 @@ public class Admin implements Module{
     }
 
     // -------------Getters---------------
-    public Stusent getStudent(String email){
+    public Student getStudent(String email){
 
         return null;
     }
