@@ -12,12 +12,14 @@ class AccountManager implements Module{
     static AccountManager INSTANCE = new AccountManager();
     private AccountManager() {}
     Student createStudent(String email, String password){
+        if(emailContain(email)) return null;
         Student student = new Student(email);
         students.put(email, student);
         passwords.put(student, password);
         return student;
     }
     Instructor createInstructor(String email, String password){
+        if(emailContain(email)) return null;
         Instructor instructor = new Instructor(email);
         instructors.put(email, instructor);
         passwords.put(instructor, password);
@@ -28,6 +30,7 @@ class AccountManager implements Module{
     Student getStudent(String email){return students.get(email);}
     Instructor getInstructor(String email){return instructors.get(email);}
     Admin createAdmin(String email, String password){
+        if(emailContain(email)) return null;
         Admin admin = new Admin(email);
         admins.put(email, admin);
         passwords.put(admin, password);
@@ -51,4 +54,8 @@ class AccountManager implements Module{
             return null;
         }
     }
+    boolean emailContain(String email){
+        return students.containsKey(email) || instructors.containsKey(email) || admins.containsKey(email);
+    }
+
 }

@@ -1,5 +1,6 @@
 package moodle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student implements Module {
@@ -12,19 +13,23 @@ public class Student implements Module {
         return null;
     }
     public List<Course> getCourses(){
-        return null;
+        return CourseManager.INSTANCE.getCoursesByStudent(email);
     }
     public List<Project> getProjects(Course course){
-        return null;
+        return ProjectManager.INSTANCE.getProjects(course);
     }
     public SubmittedProject submitProject(Project project, String answer){
-        return null;
+        return SubmittedProjectManager.INSTANCE.createSubmittedProject(project,email,answer);
     }
     public String getFeedback(SubmittedProject project){
-        return null;
+        return SubmittedProjectManager.INSTANCE.getFeedback(project);
     }
-    public List<SubmittedProject> getSubmittedProject(){
-        return null;
+    public List<SubmittedProject> getSubmittedProjects(Course course){
+        List<SubmittedProject> projects = new ArrayList<>();
+        for(Project project : ProjectManager.INSTANCE.getProjects(course)){
+            projects.add(SubmittedProjectManager.INSTANCE.getSubmission(project, email));
+        }
+        return projects;
     }
     Student(String email) {
         this.email = email;

@@ -19,41 +19,35 @@ public class Admin implements Module{
 
     // -------------Creators---------------
     public Student createStudent(String email, String password){
-
-        return null;
+        return AccountManager.INSTANCE.createStudent(email,password);
     }
     public Instructor createInstructor(String email, String password){
-
-        return null;
+        return AccountManager.INSTANCE.createInstructor(email,password);
     }
     public Course createCourse(String name, String instructorEmail, List<String> students){
-
-        return null;
+        return CourseManager.INSTANCE.createCourse(instructorEmail,students,name);
     }
 
     // -------------Getters---------------
     public Student getStudent(String email){
-
-        return null;
+        return AccountManager.INSTANCE.getStudent(email);
     }
     public Instructor getInstructor(String email){
-
-        return null;
+        return AccountManager.INSTANCE.getInstructor(email);
     }
     public Course getCourse(String name){
-
-        return null;
+        return CourseManager.INSTANCE.getCourseByName(name);
     }
 
     // -------------Removers---------------
     public void removeStudent(String email){
-
+        AccountManager.INSTANCE.removeStudent(AccountManager.INSTANCE.getStudent(email));
     }
     public void removeInstructor(String email){
-
+        AccountManager.INSTANCE.removeInstructor(AccountManager.INSTANCE.getInstructor(email));
     }
     public void removeCourse(String name){
-
+        CourseManager.INSTANCE.removeCourse(name);
     }
 
     public String getEmail() {
