@@ -2,7 +2,7 @@ package moodle;
 
 import java.util.HashMap;
 
-class AccountManager implements Module {
+class AccountManager {
     static AccountManager INSTANCE = new AccountManager();
     private final HashMap<String, Student> students = new HashMap<>();
     private final HashMap<String, Instructor> instructors = new HashMap<>();
