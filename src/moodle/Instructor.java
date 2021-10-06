@@ -4,7 +4,11 @@ import java.util.List;
 
 public class Instructor implements Module {
     private final String email;
-    public static Instructor login(){
+    public static Instructor login(String email, String password){
+        Module module = AccountManager.INSTANCE.login(email,password);
+        if(module instanceof Instructor){
+            return (Instructor) module;
+        }
         return null;
     }
     public List<Course> getCourses(){
