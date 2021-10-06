@@ -20,10 +20,10 @@ public class Student implements Module {
     public SubmittedProject submitProject(Project project, String answer){
         return null;
     }
-    public Feedback getFeedback(SubmittedProject project){
+    public String getFeedback(SubmittedProject project){
         return null;
     }
-    public List<SubmitedProject> getSubmittedProject(){
+    public List<SubmittedProject> getSubmittedProject(){
         return null;
     }
     Student(String email) {
