@@ -9,6 +9,14 @@ public class Admin implements Module{
         this.email = email;
     }
 
+    public static Admin login(String email, String password){
+        Module module = AccountManager.INSTANCE.login(email,password);
+        if(module instanceof Admin){
+            return (Admin) module;
+        }
+        return null;
+    }
+
     // -------------Creators---------------
     public Student createStudent(String email, String password){
 
