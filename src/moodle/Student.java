@@ -2,9 +2,24 @@ package moodle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Student implements Module {
     private final String email;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(email, student.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
+
     public static Student login(String email, String password) {
         Module module = AccountManager.INSTANCE.login(email,password);
         if(module instanceof Student){
@@ -12,6 +27,14 @@ public class Student implements Module {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "email='" + email + '\'' +
+                '}';
+    }
+
     public List<Course> getCourses(){
         return CourseManager.INSTANCE.getCoursesByStudent(email);
     }

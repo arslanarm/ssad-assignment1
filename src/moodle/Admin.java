@@ -1,9 +1,23 @@
 package moodle;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Admin implements Module{
     private final String email;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin admin = (Admin) o;
+        return Objects.equals(email, admin.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
 
     Admin(String email) {
         this.email = email;

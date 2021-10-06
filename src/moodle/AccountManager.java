@@ -1,13 +1,12 @@
 package moodle;
 
 import java.util.HashMap;
-import java.util.List;
 
 class AccountManager implements Module{
-    private HashMap<String,Student> students = new HashMap<>();
-    private HashMap<String,Instructor> instructors = new HashMap<>();
-    private HashMap<String,Admin> admins = new HashMap<>();
-    private HashMap<Module, String> passwords = new HashMap<>();
+    private final HashMap<String,Student> students = new HashMap<>();
+    private final HashMap<String,Instructor> instructors = new HashMap<>();
+    private final HashMap<String,Admin> admins = new HashMap<>();
+    private final HashMap<Module, String> passwords = new HashMap<>();
 
     static AccountManager INSTANCE = new AccountManager();
     private AccountManager() {}

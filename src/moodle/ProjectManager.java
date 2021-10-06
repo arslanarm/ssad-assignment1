@@ -34,7 +34,7 @@ class ProjectManager {
     Project getProject(Course course, String name) {
 
         return projects.stream()
-                .filter(element -> element.course == course && element.name.equals(name))
+                .filter(element -> element.course.equals(course) && element.name.equals(name))
                 .findFirst()
                 .orElse(null);
     }

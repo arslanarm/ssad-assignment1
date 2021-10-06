@@ -1,9 +1,23 @@
 package moodle;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Instructor implements Module {
     private final String email;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Instructor that = (Instructor) o;
+        return Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
+    }
 
     public static Instructor login(String email, String password) {
         Module module = AccountManager.INSTANCE.login(email, password);
@@ -13,12 +27,19 @@ public class Instructor implements Module {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "email='" + email + '\'' +
+                '}';
+    }
+
     public List<Course> getCourses() {
         return CourseManager.INSTANCE.getCoursesByInstructor(email);
     }
 
-    public void uploadProject(Course course, String name, String task) {
-        ProjectManager.INSTANCE.createProject(name, course, task);
+    public Project uploadProject(Course course, String name, String task) {
+        return ProjectManager.INSTANCE.createProject(name, course, task);
     }
 
     public List<SubmittedProject> getSubmittedProjects(Project project) {

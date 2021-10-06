@@ -7,10 +7,12 @@ class CourseManager {
     static CourseManager INSTANCE = new CourseManager();
     private CourseManager() {}
 
-    private List<Course> courses;
+    private final List<Course> courses = new ArrayList<>();
 
     Course createCourse(String instructor, List<String> students, String name){
-        return new Course(instructor, students, name);
+        Course course = new Course(instructor, students, name);
+        courses.add(course);
+        return course;
     }
     List<Course> getCourses(){
         return this.courses;
@@ -18,8 +20,7 @@ class CourseManager {
 
     List<Course> getCoursesByInstructor(String instructor){
         List<Course> temp = new ArrayList<>();
-        for (Course course:
-             courses) {
+        for (Course course: courses) {
             if (course.getInstructor().equals(instructor)){
                 temp.add(course);
             }
@@ -29,8 +30,7 @@ class CourseManager {
 
     List<Course> getCoursesByStudent(String student){
         List<Course> temp = new ArrayList<>();
-        for (Course course:
-                courses) {
+        for (Course course: courses) {
             if (course.getStudents().contains(student)){
                 temp.add(course);
             }
