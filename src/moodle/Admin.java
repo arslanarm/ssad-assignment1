@@ -3,6 +3,12 @@ package moodle;
 import java.util.List;
 
 public class Admin implements Module{
+    private final String email;
+
+    Admin(String email) {
+        this.email = email;
+    }
+
     // -------------Creators---------------
     public Student createStudent(String email, String password){
 
@@ -42,4 +48,7 @@ public class Admin implements Module{
 
     }
 
+    public String getEmail() {
+        return email;
+    }
 }
