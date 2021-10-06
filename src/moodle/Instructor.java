@@ -6,6 +6,18 @@ import java.util.Objects;
 public class Instructor implements Module {
     private final String email;
 
+    Instructor(String email) {
+        this.email = email;
+    }
+
+    public static Instructor login(String email, String password) {
+        Module module = AccountManager.INSTANCE.login(email, password);
+        if (module instanceof Instructor) {
+            return (Instructor) module;
+        }
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -17,14 +29,6 @@ public class Instructor implements Module {
     @Override
     public int hashCode() {
         return Objects.hash(email);
-    }
-
-    public static Instructor login(String email, String password) {
-        Module module = AccountManager.INSTANCE.login(email, password);
-        if (module instanceof Instructor) {
-            return (Instructor) module;
-        }
-        return null;
     }
 
     @Override
@@ -47,11 +51,7 @@ public class Instructor implements Module {
     }
 
     public void uploadFeedback(SubmittedProject project, String feedback) {
-        SubmittedProjectManager.INSTANCE.updateFeedback(project,feedback);
-    }
-
-    Instructor(String email) {
-        this.email = email;
+        SubmittedProjectManager.INSTANCE.updateFeedback(project, feedback);
     }
 
     public String getEmail() {

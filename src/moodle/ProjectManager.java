@@ -5,11 +5,10 @@ import java.util.List;
 
 class ProjectManager {
     static ProjectManager INSTANCE = new ProjectManager();
+    List<Project> projects = new ArrayList<>();
 
     private ProjectManager() {
     }
-
-    List<Project> projects = new ArrayList<>();
 
     Project createProject(String name, Course course, String task) {
         Project project = new Project(name, course, task);
@@ -24,7 +23,7 @@ class ProjectManager {
     List<Project> getProjects(Course course) {
         List<Project> list = new ArrayList<>();
         for (Project element : projects) {
-            if (element.course == course) {
+            if (element.getCourse().equals(course)) {
                 list.add(element);
             }
         }
@@ -34,7 +33,7 @@ class ProjectManager {
     Project getProject(Course course, String name) {
 
         return projects.stream()
-                .filter(element -> element.course.equals(course) && element.name.equals(name))
+                .filter(element -> element.getCourse().equals(course) && element.getName().equals(name))
                 .findFirst()
                 .orElse(null);
     }

@@ -8,13 +8,12 @@ import java.util.stream.Collectors;
 class SubmittedProjectManager {
 
     static SubmittedProjectManager INSTANCE = new SubmittedProjectManager();
-
+    private final List<SubmittedProject> submittedProjects = new ArrayList<>();
+    private final HashMap<SubmittedProject, String> feedbackMap = new HashMap<>();
     private SubmittedProjectManager() {
     }
 
-   private final List<SubmittedProject> submittedProjects = new ArrayList<>();
-    private final HashMap<SubmittedProject, String> feedbackMap = new HashMap<>();
-    SubmittedProject createSubmittedProject(Project project, String student, String answer){
+    SubmittedProject createSubmittedProject(Project project, String student, String answer) {
         SubmittedProject submittedProject = new SubmittedProject(project, student, answer);
         submittedProjects.add(submittedProject);
         return submittedProject;
@@ -31,10 +30,12 @@ class SubmittedProjectManager {
     SubmittedProject getSubmission(Project project, String student) {
         return submittedProjects.stream().filter(element -> element.getProject().equals(project) && element.getStudent().equals(student)).findFirst().orElseGet(null);
     }
-    void updateFeedback(SubmittedProject project,String feedback){
-        feedbackMap.put(project,feedback);
+
+    void updateFeedback(SubmittedProject project, String feedback) {
+        feedbackMap.put(project, feedback);
     }
-    String getFeedback(SubmittedProject project){
+
+    String getFeedback(SubmittedProject project) {
         return feedbackMap.get(project);
     }
 }

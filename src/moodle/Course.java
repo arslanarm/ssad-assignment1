@@ -4,6 +4,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class Course {
+    private final String instructor;
+    private final List<String> students;
+    private final String name;
+
+    Course(String instructor, List<String> students, String name) {
+        this.instructor = instructor;
+        this.students = students;
+        this.name = name;
+    }
+
     public String getInstructor() {
         return instructor;
     }
@@ -37,14 +47,5 @@ public class Course {
     public String getName() {
         return name;
     }
-
-    Course(String instructor, List<String> students, String name){
-        this.instructor = instructor;
-        this.students = students;
-        this.name = name;
-    }
-    private final String instructor;
-    private final List<String> students;
-    private final String name;
 
 }

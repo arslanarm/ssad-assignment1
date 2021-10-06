@@ -7,6 +7,12 @@ public class SubmittedProject {
     private final String student;
     private final String answer;
 
+    SubmittedProject(Project project, String student, String answer) {
+        this.project = project;
+        this.student = student;
+        this.answer = answer;
+    }
+
     public Project getProject() {
         return project;
     }
@@ -39,11 +45,5 @@ public class SubmittedProject {
                 ", student='" + student + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
-    }
-
-    SubmittedProject(Project project, String student, String answer){
-        this.project=project;
-        this.student=student;
-        this.answer=answer;
     }
 }

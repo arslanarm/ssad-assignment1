@@ -3,6 +3,28 @@ package moodle;
 import java.util.Objects;
 
 public class Project {
+    private final String name;
+    private final Course course;
+    private final String task;
+
+    Project(String name, Course course, String task) {
+        this.name = name;
+        this.course = course;
+        this.task = task;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public String getTask() {
+        return task;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
@@ -23,14 +45,5 @@ public class Project {
     @Override
     public int hashCode() {
         return Objects.hash(name, course, task);
-    }
-
-    String name;
-    Course course;
-    String task;
-    Project(String name, Course course, String task) {
-        this.name = name;
-        this.course = course;
-        this.task = task;
     }
 }
