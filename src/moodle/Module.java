@@ -1,5 +1,5 @@
 package moodle;
 
-public interface Module<T> {
+public interface Module {
 
 }
