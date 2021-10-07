@@ -2,6 +2,9 @@ package moodle;
 
 import java.util.Objects;
 
+/**
+ * Project class provides the main functionality for monitoring projects in the system
+ */
 public class Project {
     private final String name;
     private final Course course;
@@ -13,14 +16,23 @@ public class Project {
         this.task = task;
     }
 
+    /**
+     * @return project name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return project course
+     */
     public Course getCourse() {
         return course;
     }
 
+    /**
+     * @return project task
+     */
     public String getTask() {
         return task;
     }
@@ -34,6 +46,12 @@ public class Project {
                 '}';
     }
 
+    /**
+     * Method checks equality of 2 objects
+     *
+     * @param o Object to test for equality
+     * @return Equality of objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

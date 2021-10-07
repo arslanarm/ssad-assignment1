@@ -3,6 +3,9 @@ package moodle;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Course class provides functionality for managing course content.
+ */
 public class Course {
     private final String instructor;
     private final List<String> students;
@@ -14,10 +17,16 @@ public class Course {
         this.name = name;
     }
 
+    /**
+     * @return Instructor
+     */
     public String getInstructor() {
         return instructor;
     }
 
+    /**
+     * @return list of names
+     */
     public List<String> getStudents() {
         return students;
     }
@@ -31,6 +40,12 @@ public class Course {
                 '}';
     }
 
+    /**
+     * Method checks equality of 2 objects
+     *
+     * @param o Object to test for equality
+     * @return Equality of objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +59,9 @@ public class Course {
         return Objects.hash(instructor, students, name);
     }
 
+    /**
+     * @return Course name
+     */
     public String getName() {
         return name;
     }

@@ -2,6 +2,9 @@ package moodle;
 
 import java.util.Objects;
 
+/**
+ * SubmittedProject class provides basic functionality for managing submitted project
+ */
 public class SubmittedProject {
     private final Project project;
     private final String student;
@@ -13,18 +16,33 @@ public class SubmittedProject {
         this.answer = answer;
     }
 
+    /**
+     * @return project
+     */
     public Project getProject() {
         return project;
     }
 
+    /**
+     * @return student of the project
+     */
     public String getStudent() {
         return student;
     }
 
+    /**
+     * @return answer of the project
+     */
     public String getAnswer() {
         return answer;
     }
 
+    /**
+     * Method checks equality of 2 objects
+     *
+     * @param o Object to test for equality
+     * @return Equality of objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

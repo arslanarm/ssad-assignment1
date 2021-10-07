@@ -11,6 +11,13 @@ public class Student implements Module {
         this.email = email;
     }
 
+    /**
+     * The method allows the student to log in to the system.
+     *
+     * @param email student email
+     * @param password student password
+     * @return Student module / none
+     */
     public static Student login(String email, String password) {
         Module module = AccountManager.INSTANCE.login(email, password);
         if (module instanceof Student) {
@@ -19,6 +26,12 @@ public class Student implements Module {
         return null;
     }
 
+    /**
+     * Method checks equality of 2 objects
+     *
+     * @param o Object to test for equality
+     * @return Equality of objects
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,22 +52,50 @@ public class Student implements Module {
                 '}';
     }
 
+    /**
+     * @return List of the courses
+     */
     public List<Course> getCourses() {
         return CourseManager.INSTANCE.getCoursesByStudent(email);
     }
 
+    /**
+     * The method find and returns projects of the course
+     *
+     * @param course Curse of the projects
+     * @return list of projects
+     */
     public List<Project> getProjects(Course course) {
         return ProjectManager.INSTANCE.getProjects(course);
     }
 
+    /**
+     * The method allow submitting project
+     *
+     * @param project Project for submitting
+     * @param answer Answer of the project
+     * @return Submitted Project
+     */
     public SubmittedProject submitProject(Project project, String answer) {
         return SubmittedProjectManager.INSTANCE.createSubmittedProject(project, email, answer);
     }
 
+    /**
+     * The method returns feedback of the project
+     *
+     * @param project Project for feedback
+     * @return Feedback of the project
+     */
     public String getFeedback(SubmittedProject project) {
         return SubmittedProjectManager.INSTANCE.getFeedback(project);
     }
 
+    /**
+     * The method find all projects of the course for the student
+     *
+     * @param course course of the projects
+     * @return list of the submitted projects
+     */
     public List<SubmittedProject> getSubmittedProjects(Course course) {
         List<SubmittedProject> projects = new ArrayList<>();
         for (Project project : ProjectManager.INSTANCE.getProjects(course)) {
@@ -63,6 +104,9 @@ public class Student implements Module {
         return projects;
     }
 
+    /**
+     * @return email of the student
+     */
     public String getEmail() {
         return email;
     }
