@@ -1,6 +1,7 @@
 package moodle;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -8,12 +9,23 @@ import java.util.HashMap;
  */
 class AccountManager {
     static AccountManager INSTANCE = new AccountManager();
-    private final HashMap<String, Student> students = new HashMap<>();
-    private final HashMap<String, Instructor> instructors = new HashMap<>();
-    private final HashMap<String, Admin> admins = new HashMap<>();
+    private final Map<String, Module> modules = new HashMap<>();
     private final HashMap<Module, String> passwords = new HashMap<>();
 
     private AccountManager() {
+    }
+
+
+    /**
+     * Method creates a record about the user
+     *
+     * @param email email of user
+     * @param module user object
+     * @param password user's password
+     */
+    private void createModule(String email, Module module, String password) {
+        modules.put(email, module);
+        passwords.put(module, password);
     }
 
     /**
@@ -26,8 +38,7 @@ class AccountManager {
     Student createStudent(String email, String password) {
         if (emailContain(email)) return null;
         Student student = new Student(email);
-        students.put(email, student);
-        passwords.put(student, password);
+        createModule(email, student, password);
         return student;
     }
 
@@ -41,8 +52,7 @@ class AccountManager {
     Instructor createInstructor(String email, String password) {
         if (emailContain(email)) return null;
         Instructor instructor = new Instructor(email);
-        instructors.put(email, instructor);
-        passwords.put(instructor, password);
+        createModule(email, instructor, password);
         return instructor;
     }
 
@@ -52,7 +62,7 @@ class AccountManager {
      * @param student student to remove
      */
     void removeStudent(Student student) {
-        students.remove(student.getEmail());
+        modules.remove(student.getEmail());
     }
 
     /**
@@ -61,7 +71,7 @@ class AccountManager {
      * @param instructor instructor to remove
      */
     void removeInstructor(Instructor instructor) {
-        instructors.remove(instructor.getEmail());
+        modules.remove(instructor.getEmail());
     }
 
     /**
@@ -71,7 +81,9 @@ class AccountManager {
      * @return Student
      */
     Student getStudent(String email) {
-        return students.get(email);
+        Module module = modules.get(email);
+        if (module instanceof Student) return (Student) module;
+        return null;
     }
 
     /**
@@ -81,7 +93,9 @@ class AccountManager {
      * @return Instructor
      */
     Instructor getInstructor(String email) {
-        return instructors.get(email);
+        Module module = modules.get(email);
+        if (module instanceof Instructor) return (Instructor) module;
+        return null;
     }
 
     /**
@@ -94,8 +108,7 @@ class AccountManager {
     Admin createAdmin(String email, String password) {
         if (emailContain(email)) return null;
         Admin admin = new Admin(email);
-        admins.put(email, admin);
-        passwords.put(admin, password);
+        createModule(email, admin, password);
         return admin;
     }
 
@@ -105,7 +118,7 @@ class AccountManager {
      * @param admin Admin instance
      */
     void removeAdmin(Admin admin) {
-        admins.remove(admin.getEmail());
+        modules.remove(admin.getEmail());
     }
 
 
@@ -116,7 +129,9 @@ class AccountManager {
      * @return Admin
      */
     Admin getAdmin(String email) {
-        return admins.get(email);
+        Module module = modules.get(email);
+        if (module instanceof Admin) return (Admin) module;
+        return null;
     }
 
 
@@ -128,16 +143,9 @@ class AccountManager {
      * @return The module to which the user belongs
      */
     Module login(String email, String password) {
-        Module module = getStudent(email);
-        if (module == null) {
-            module = getInstructor(email);
-        }
-        if (module == null) {
-            module = getAdmin(email);
-        }
+        Module module = modules.get(email);
         if (module == null) return null;
-
-        if (passwords.get(module) == password) {
+        if (passwords.get(module).equals(password)) {
             return module;
         } else {
             return null;
@@ -151,7 +159,7 @@ class AccountManager {
      * @return True -> one of the users has email / False -> none of the users have an email
      */
     boolean emailContain(String email) {
-        return students.containsKey(email) || instructors.containsKey(email) || admins.containsKey(email);
+        return modules.containsKey(email);
     }
 
 }
