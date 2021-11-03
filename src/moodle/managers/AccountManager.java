@@ -1,4 +1,9 @@
-package moodle;
+package moodle.managers;
+
+import moodle.modules.Admin;
+import moodle.modules.Instructor;
+import moodle.modules.Module;
+import moodle.modules.Student;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,12 +12,12 @@ import java.util.Map;
 /**
  *  The AccountManager class manages the administrator, instructor, and student entities on the system.
  */
-class AccountManager {
-    static AccountManager INSTANCE = new AccountManager();
+public class AccountManager {
+
     private final Map<String, Module> modules = new HashMap<>();
     private final HashMap<Module, String> passwords = new HashMap<>();
 
-    private AccountManager() {
+    AccountManager() {
     }
 
 
@@ -35,7 +40,7 @@ class AccountManager {
      * @param password password of student
      * @return Student
      */
-    Student createStudent(String email, String password) {
+    public Student createStudent(String email, String password) {
         if (emailContain(email)) return null;
         Student student = new Student(email);
         createModule(email, student, password);
@@ -49,7 +54,7 @@ class AccountManager {
      * @param password password of instructor
      * @return Instructor
      */
-    Instructor createInstructor(String email, String password) {
+    public Instructor createInstructor(String email, String password) {
         if (emailContain(email)) return null;
         Instructor instructor = new Instructor(email);
         createModule(email, instructor, password);
@@ -61,7 +66,7 @@ class AccountManager {
      *
      * @param student student to remove
      */
-    void removeStudent(Student student) {
+    public void removeStudent(Student student) {
         modules.remove(student.getEmail());
     }
 
@@ -70,7 +75,7 @@ class AccountManager {
      *
      * @param instructor instructor to remove
      */
-    void removeInstructor(Instructor instructor) {
+    public void removeInstructor(Instructor instructor) {
         modules.remove(instructor.getEmail());
     }
 
@@ -80,7 +85,7 @@ class AccountManager {
      * @param email email of student
      * @return Student
      */
-    Student getStudent(String email) {
+    public Student getStudent(String email) {
         Module module = modules.get(email);
         if (module instanceof Student) return (Student) module;
         return null;
@@ -92,7 +97,7 @@ class AccountManager {
      * @param email email of instructor
      * @return Instructor
      */
-    Instructor getInstructor(String email) {
+    public Instructor getInstructor(String email) {
         Module module = modules.get(email);
         if (module instanceof Instructor) return (Instructor) module;
         return null;
@@ -105,7 +110,7 @@ class AccountManager {
      * @param password password of admin
      * @return Admin
      */
-    Admin createAdmin(String email, String password) {
+    public Admin createAdmin(String email, String password) {
         if (emailContain(email)) return null;
         Admin admin = new Admin(email);
         createModule(email, admin, password);
@@ -117,7 +122,7 @@ class AccountManager {
      *
      * @param admin Admin instance
      */
-    void removeAdmin(Admin admin) {
+    public void removeAdmin(Admin admin) {
         modules.remove(admin.getEmail());
     }
 
@@ -128,7 +133,7 @@ class AccountManager {
      * @param email email of addmin
      * @return Admin
      */
-    Admin getAdmin(String email) {
+    public Admin getAdmin(String email) {
         Module module = modules.get(email);
         if (module instanceof Admin) return (Admin) module;
         return null;
@@ -142,7 +147,7 @@ class AccountManager {
      * @param password password of user
      * @return The module to which the user belongs
      */
-    Module login(String email, String password) {
+    public Module login(String email, String password) {
         Module module = modules.get(email);
         if (module == null) return null;
         if (passwords.get(module).equals(password)) {

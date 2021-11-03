@@ -1,4 +1,6 @@
-package moodle;
+package moodle.managers;
+
+import moodle.datatypes.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +8,11 @@ import java.util.List;
 /**
  * The CourseManager class includes functionality for managing courses.
  */
-class CourseManager {
-    static CourseManager INSTANCE = new CourseManager();
+public class CourseManager {
+
     private final List<Course> courses = new ArrayList<>();
 
-    private CourseManager() {
+    CourseManager() {
     }
 
     /**
@@ -21,7 +23,7 @@ class CourseManager {
      * @param name name of the course
      * @return Course
      */
-    Course createCourse(String instructor, List<String> students, String name) {
+    public Course createCourse(String instructor, List<String> students, String name) {
         Course course = new Course(instructor, students, name);
         courses.add(course);
         return course;
@@ -38,7 +40,7 @@ class CourseManager {
      * @param instructor instructor name
      * @return all courses with that instructor
      */
-    List<Course> getCoursesByInstructor(String instructor) {
+    public List<Course> getCoursesByInstructor(String instructor) {
         List<Course> temp = new ArrayList<>();
         for (Course course : courses) {
             if (course.getInstructor().equals(instructor)) {
@@ -52,7 +54,7 @@ class CourseManager {
      * @param student student name
      * @return all courses with that student
      */
-    List<Course> getCoursesByStudent(String student) {
+    public List<Course> getCoursesByStudent(String student) {
         List<Course> temp = new ArrayList<>();
         for (Course course : courses) {
             if (course.getStudents().contains(student)) {
@@ -66,7 +68,7 @@ class CourseManager {
      * @param name course name
      * @return Course
      */
-    Course getCourseByName(String name) {
+    public Course getCourseByName(String name) {
         for (Course course :
                 courses) {
             if (course.getName().equals(name)) {
@@ -81,7 +83,7 @@ class CourseManager {
      *
      * @param name course name
      */
-    void removeCourse(String name) {
+    public void removeCourse(String name) {
         courses.removeIf(course -> course.getName().equals(name));
     }
 }

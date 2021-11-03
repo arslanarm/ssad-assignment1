@@ -1,4 +1,4 @@
-package moodle;
+package moodle.datatypes;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class Project {
     private final Course course;
     private final String task;
 
-    Project(String name, Course course, String task) {
+    public Project(String name, Course course, String task) {
         this.name = name;
         this.course = course;
         this.task = task;

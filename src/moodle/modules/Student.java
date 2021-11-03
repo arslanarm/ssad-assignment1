@@ -1,4 +1,9 @@
-package moodle;
+package moodle.modules;
+
+import moodle.datatypes.Course;
+import moodle.datatypes.Project;
+import moodle.datatypes.SubmittedProject;
+import moodle.managers.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +11,11 @@ import java.util.Objects;
 
 public class Student implements Module {
     private final String email;
-
-    Student(String email) {
+    private static final AccountManager accountManager = Repository.INSTANCE.getAccountManager();
+    private final CourseManager courseManager = Repository.INSTANCE.getCourseManager();
+    private final ProjectManager projectManager = Repository.INSTANCE.getProjectManager();
+    private final SubmittedProjectManager submittedProjectManager = Repository.INSTANCE.getSubmittedProjectManager();
+    public Student(String email) {
         this.email = email;
     }
 
@@ -19,7 +27,7 @@ public class Student implements Module {
      * @return Student module / none
      */
     public static Student login(String email, String password) {
-        Module module = AccountManager.INSTANCE.login(email, password);
+        Module module = accountManager.login(email, password);
         if (module instanceof Student) {
             return (Student) module;
         }
@@ -56,7 +64,7 @@ public class Student implements Module {
      * @return List of the courses
      */
     public List<Course> getCourses() {
-        return CourseManager.INSTANCE.getCoursesByStudent(email);
+        return courseManager.getCoursesByStudent(email);
     }
 
     /**
@@ -66,7 +74,7 @@ public class Student implements Module {
      * @return list of projects
      */
     public List<Project> getProjects(Course course) {
-        return ProjectManager.INSTANCE.getProjects(course);
+        return projectManager.getProjects(course);
     }
 
     /**
@@ -77,7 +85,7 @@ public class Student implements Module {
      * @return Submitted Project
      */
     public SubmittedProject submitProject(Project project, String answer) {
-        return SubmittedProjectManager.INSTANCE.createSubmittedProject(project, email, answer);
+        return submittedProjectManager.createSubmittedProject(project, email, answer);
     }
 
     /**
@@ -87,7 +95,7 @@ public class Student implements Module {
      * @return Feedback of the project
      */
     public String getFeedback(SubmittedProject project) {
-        return SubmittedProjectManager.INSTANCE.getFeedback(project);
+        return submittedProjectManager.getFeedback(project);
     }
 
     /**
@@ -98,8 +106,8 @@ public class Student implements Module {
      */
     public List<SubmittedProject> getSubmittedProjects(Course course) {
         List<SubmittedProject> projects = new ArrayList<>();
-        for (Project project : ProjectManager.INSTANCE.getProjects(course)) {
-            projects.add(SubmittedProjectManager.INSTANCE.getSubmission(project, email));
+        for (Project project : projectManager.getProjects(course)) {
+            projects.add(submittedProjectManager.getSubmission(project, email));
         }
         return projects;
     }

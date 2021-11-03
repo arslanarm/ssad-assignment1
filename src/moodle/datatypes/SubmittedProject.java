@@ -1,4 +1,4 @@
-package moodle;
+package moodle.datatypes;
 
 import java.util.Objects;
 
@@ -10,7 +10,7 @@ public class SubmittedProject {
     private final String student;
     private final String answer;
 
-    SubmittedProject(Project project, String student, String answer) {
+    public SubmittedProject(Project project, String student, String answer) {
         this.project = project;
         this.student = student;
         this.answer = answer;

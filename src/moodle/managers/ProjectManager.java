@@ -1,4 +1,7 @@
-package moodle;
+package moodle.managers;
+
+import moodle.datatypes.Course;
+import moodle.datatypes.Project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +9,11 @@ import java.util.List;
 /**
  * ProjectManager class provides basic functionality for project management
  */
-class ProjectManager {
-    static ProjectManager INSTANCE = new ProjectManager();
+public class ProjectManager {
+
     List<Project> projects = new ArrayList<>();
 
-    private ProjectManager() {
+    ProjectManager() {
     }
 
     /**
@@ -21,7 +24,7 @@ class ProjectManager {
      * @param task project task
      * @return Project
      */
-    Project createProject(String name, Course course, String task) {
+    public Project createProject(String name, Course course, String task) {
         Project project = new Project(name, course, task);
         projects.add(project);
         return project;
@@ -41,7 +44,7 @@ class ProjectManager {
      * @param course Course of the projects
      * @return list of projects
      */
-    List<Project> getProjects(Course course) {
+    public List<Project> getProjects(Course course) {
         List<Project> list = new ArrayList<>();
         for (Project element : projects) {
             if (element.getCourse().equals(course)) {

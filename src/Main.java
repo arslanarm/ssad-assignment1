@@ -1,10 +1,16 @@
-import moodle.*;
+import moodle.datatypes.Course;
+import moodle.datatypes.Project;
+import moodle.datatypes.SubmittedProject;
+import moodle.managers.Repository;
+import moodle.modules.Admin;
+import moodle.modules.Instructor;
+import moodle.modules.Student;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Test.createTestAdmin();
+        Repository.INSTANCE.getAccountManager().createAdmin("test@test", "test");
         Admin admin = Admin.login("test@test", "test");
         assert admin != null;
 

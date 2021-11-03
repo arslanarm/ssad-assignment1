@@ -1,4 +1,4 @@
-package moodle;
+package moodle.datatypes;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +11,7 @@ public class Course {
     private final List<String> students;
     private final String name;
 
-    Course(String instructor, List<String> students, String name) {
+    public Course(String instructor, List<String> students, String name) {
         this.instructor = instructor;
         this.students = students;
         this.name = name;

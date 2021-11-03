@@ -1,4 +1,7 @@
-package moodle;
+package moodle.modules;
+
+import moodle.datatypes.Course;
+import moodle.managers.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +13,12 @@ import java.util.Objects;
 public class Admin implements Module {
     private final String email;
 
-    Admin(String email) {
+    private static final AccountManager accountManager = Repository.INSTANCE.getAccountManager();
+    private final CourseManager courseManager = Repository.INSTANCE.getCourseManager();
+    private final ProjectManager projectManager = Repository.INSTANCE.getProjectManager();
+    private final SubmittedProjectManager submittedProjectManager = Repository.INSTANCE.getSubmittedProjectManager();
+
+    public Admin(String email) {
         this.email = email;
     }
 
@@ -22,7 +30,7 @@ public class Admin implements Module {
      * @return Admin module/None
      */
     public static Admin login(String email, String password) {
-        Module module = AccountManager.INSTANCE.login(email, password);
+        Module module = accountManager.login(email, password);
         if (module instanceof Admin) {
             return (Admin) module;
         }
@@ -57,7 +65,7 @@ public class Admin implements Module {
      * @return Student
      */
     public Student createStudent(String email, String password) {
-        return AccountManager.INSTANCE.createStudent(email, password);
+        return accountManager.createStudent(email, password);
     }
 
     /**
@@ -68,7 +76,7 @@ public class Admin implements Module {
      * @return Instructor
      */
     public Instructor createInstructor(String email, String password) {
-        return AccountManager.INSTANCE.createInstructor(email, password);
+        return accountManager.createInstructor(email, password);
     }
 
     /**
@@ -80,7 +88,7 @@ public class Admin implements Module {
      * @return Course
      */
     public Course createCourse(String name, String instructorEmail, List<String> students) {
-        return CourseManager.INSTANCE.createCourse(instructorEmail, students, name);
+        return courseManager.createCourse(instructorEmail, students, name);
     }
 
     // -------------Getters---------------
@@ -91,7 +99,7 @@ public class Admin implements Module {
      * @return Student
      */
     public Student getStudent(String email) {
-        return AccountManager.INSTANCE.getStudent(email);
+        return accountManager.getStudent(email);
     }
 
     /**
@@ -101,7 +109,7 @@ public class Admin implements Module {
      * @return Instructor
      */
     public Instructor getInstructor(String email) {
-        return AccountManager.INSTANCE.getInstructor(email);
+        return accountManager.getInstructor(email);
     }
 
     /**
@@ -111,7 +119,7 @@ public class Admin implements Module {
      * @return Course
      */
     public Course getCourse(String name) {
-        return CourseManager.INSTANCE.getCourseByName(name);
+        return courseManager.getCourseByName(name);
     }
 
     // -------------Removers---------------
@@ -121,7 +129,7 @@ public class Admin implements Module {
      * @param email email of student
      */
     public void removeStudent(String email) {
-        AccountManager.INSTANCE.removeStudent(AccountManager.INSTANCE.getStudent(email));
+        accountManager.removeStudent(accountManager.getStudent(email));
     }
 
     /**
@@ -130,7 +138,7 @@ public class Admin implements Module {
      * @param email email of instructor
      */
     public void removeInstructor(String email) {
-        AccountManager.INSTANCE.removeInstructor(AccountManager.INSTANCE.getInstructor(email));
+        accountManager.removeInstructor(accountManager.getInstructor(email));
     }
 
     /**
@@ -139,7 +147,7 @@ public class Admin implements Module {
      * @param name name of course
      */
     public void removeCourse(String name) {
-        CourseManager.INSTANCE.removeCourse(name);
+        courseManager.removeCourse(name);
     }
 
     public String getEmail() {

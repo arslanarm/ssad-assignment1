@@ -1,4 +1,9 @@
-package moodle;
+package moodle.modules;
+
+import moodle.datatypes.Course;
+import moodle.datatypes.Project;
+import moodle.datatypes.SubmittedProject;
+import moodle.managers.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +14,12 @@ import java.util.Objects;
 public class Instructor implements Module {
     private final String email;
 
-    Instructor(String email) {
+    private static final AccountManager accountManager = Repository.INSTANCE.getAccountManager();
+    private final CourseManager courseManager = Repository.INSTANCE.getCourseManager();
+    private final ProjectManager projectManager = Repository.INSTANCE.getProjectManager();
+    private final SubmittedProjectManager submittedProjectManager = Repository.INSTANCE.getSubmittedProjectManager();
+
+    public Instructor(String email) {
         this.email = email;
     }
 
@@ -21,7 +31,7 @@ public class Instructor implements Module {
      * @return module of instructor or none
      */
     public static Instructor login(String email, String password) {
-        Module module = AccountManager.INSTANCE.login(email, password);
+        Module module = accountManager.login(email, password);
         if (module instanceof Instructor) {
             return (Instructor) module;
         }
@@ -58,7 +68,7 @@ public class Instructor implements Module {
      * @return courses list
      */
     public List<Course> getCourses() {
-        return CourseManager.INSTANCE.getCoursesByInstructor(email);
+        return courseManager.getCoursesByInstructor(email);
     }
 
     /**
@@ -70,7 +80,7 @@ public class Instructor implements Module {
      * @return Project
      */
     public Project uploadProject(Course course, String name, String task) {
-        return ProjectManager.INSTANCE.createProject(name, course, task);
+        return projectManager.createProject(name, course, task);
     }
 
     /**
@@ -80,7 +90,7 @@ public class Instructor implements Module {
      * @return list of submitted projects
      */
     public List<SubmittedProject> getSubmittedProjects(Project project) {
-        return SubmittedProjectManager.INSTANCE.getSubmissions(project);
+        return submittedProjectManager.getSubmissions(project);
     }
 
 
@@ -91,7 +101,7 @@ public class Instructor implements Module {
      * @param feedback feedback for the project
      */
     public void uploadFeedback(SubmittedProject project, String feedback) {
-        SubmittedProjectManager.INSTANCE.updateFeedback(project, feedback);
+        submittedProjectManager.updateFeedback(project, feedback);
     }
 
     /**
