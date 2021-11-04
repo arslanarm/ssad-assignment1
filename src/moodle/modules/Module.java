@@ -5,5 +5,5 @@ package moodle.modules;
  * Module is being used in the AccountManager to generally address these classes
  */
 public interface Module {
-
+    public String getEmail();
 }

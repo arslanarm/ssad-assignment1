@@ -150,6 +150,7 @@ public class Admin implements Module {
         courseManager.removeCourse(name);
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

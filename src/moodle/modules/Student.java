@@ -115,6 +115,7 @@ public class Student implements Module {
     /**
      * @return email of the student
      */
+    @Override
     public String getEmail() {
         return email;
     }

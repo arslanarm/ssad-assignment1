@@ -6,10 +6,10 @@ public class Repository {
     }
     public static Repository INSTANCE = new Repository();
 
-    private final AccountManager accountManager = new AccountManager();
-    private final CourseManager courseManager = new CourseManager();
-    private final ProjectManager projectManager = new ProjectManager();
-    private final SubmittedProjectManager submittedProjectManager = new SubmittedProjectManager();
+    private final AccountManager accountManager = new AccountManagerImpl();
+    private final CourseManager courseManager = new CourseManagerImpl();
+    private final ProjectManager projectManager = new ProjectManagerImpl();
+    private final SubmittedProjectManager submittedProjectManager = new SubmittedProjectManagerImpl();
 
     public AccountManager getAccountManager() {
         return accountManager;

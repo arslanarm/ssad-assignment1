@@ -107,6 +107,7 @@ public class Instructor implements Module {
     /**
      * @return instructor email
      */
+    @Override
     public String getEmail() {
         return email;
     }
