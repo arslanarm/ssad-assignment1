@@ -5,16 +5,7 @@ import moodle.datatypes.Course;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * The CourseManager class includes functionality for managing courses.
- */
-public class CourseManager {
-
-    private final List<Course> courses = new ArrayList<>();
-
-    CourseManager() {
-    }
-
+public interface CourseManager {
     /**
      * The method creates course
      *
@@ -23,67 +14,35 @@ public class CourseManager {
      * @param name name of the course
      * @return Course
      */
-    public Course createCourse(String instructor, List<String> students, String name) {
-        Course course = new Course(instructor, students, name);
-        courses.add(course);
-        return course;
-    }
+    public Course createCourse(String instructor, List<String> students, String name);
 
     /**
      * @return all courses
      */
-    List<Course> getCourses() {
-        return this.courses;
-    }
+    List<Course> getCourses();
 
     /**
      * @param instructor instructor name
      * @return all courses with that instructor
      */
-    public List<Course> getCoursesByInstructor(String instructor) {
-        List<Course> temp = new ArrayList<>();
-        for (Course course : courses) {
-            if (course.getInstructor().equals(instructor)) {
-                temp.add(course);
-            }
-        }
-        return temp;
-    }
+    public List<Course> getCoursesByInstructor(String instructor);
 
     /**
      * @param student student name
      * @return all courses with that student
      */
-    public List<Course> getCoursesByStudent(String student) {
-        List<Course> temp = new ArrayList<>();
-        for (Course course : courses) {
-            if (course.getStudents().contains(student)) {
-                temp.add(course);
-            }
-        }
-        return temp;
-    }
+    public List<Course> getCoursesByStudent(String student);
 
     /**
      * @param name course name
      * @return Course
      */
-    public Course getCourseByName(String name) {
-        for (Course course :
-                courses) {
-            if (course.getName().equals(name)) {
-                return course;
-            }
-        }
-        return null;
-    }
+    public Course getCourseByName(String name);
 
     /**
      * The method removes course
      *
      * @param name course name
      */
-    public void removeCourse(String name) {
-        courses.removeIf(course -> course.getName().equals(name));
-    }
+    public void removeCourse(String name);
 }

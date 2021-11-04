@@ -3,21 +3,10 @@ package moodle.managers;
 import moodle.datatypes.Project;
 import moodle.datatypes.SubmittedProject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * SubmittedProject class provides basic functionality for managing submitted projects
- */
-public class SubmittedProjectManager {
-
-    private final List<SubmittedProject> submittedProjects = new ArrayList<>();
-    private final HashMap<SubmittedProject, String> feedbackMap = new HashMap<>();
-    SubmittedProjectManager() {
-    }
-
+public interface SubmittedProjectManager {
     /**
      * The method creates submitted project
      *
@@ -26,20 +15,14 @@ public class SubmittedProjectManager {
      * @param answer project answer
      * @return Submitted Project
      */
-    public SubmittedProject createSubmittedProject(Project project, String student, String answer) {
-        SubmittedProject submittedProject = new SubmittedProject(project, student, answer);
-        submittedProjects.add(submittedProject);
-        return submittedProject;
-    }
+    public SubmittedProject createSubmittedProject(Project project, String student, String answer);
 
     /**
      * The method removes submitted project
      *
      * @param project project to remove
      */
-    void removeSubmittedProject(SubmittedProject project) {
-        submittedProjects.remove(project);
-    }
+    void removeSubmittedProject(SubmittedProject project);
 
     /**
      * The method find submissions for specific project
@@ -47,9 +30,7 @@ public class SubmittedProjectManager {
      * @param project project
      * @return list of submitted projects
      */
-    public List<SubmittedProject> getSubmissions(Project project) {
-        return submittedProjects.stream().filter(element -> element.getProject().equals(project)).collect(Collectors.toList());
-    }
+    public List<SubmittedProject> getSubmissions(Project project);
 
     /**
      * The mehod find submission of the student for the project
@@ -58,9 +39,7 @@ public class SubmittedProjectManager {
      * @param student student
      * @return  Submitted Project
      */
-    public SubmittedProject getSubmission(Project project, String student) {
-        return submittedProjects.stream().filter(element -> element.getProject().equals(project) && element.getStudent().equals(student)).findFirst().orElseGet(null);
-    }
+    public SubmittedProject getSubmission(Project project, String student);
 
     /**
      * The method updates feedback
@@ -68,15 +47,11 @@ public class SubmittedProjectManager {
      * @param project project for updating the feedback
      * @param feedback new feedback
      */
-    public void updateFeedback(SubmittedProject project, String feedback) {
-        feedbackMap.put(project, feedback);
-    }
+    public void updateFeedback(SubmittedProject project, String feedback);
 
     /**
      * @param project project for feedback
      * @return feedback
      */
-    public String getFeedback(SubmittedProject project) {
-        return feedbackMap.get(project);
-    }
+    public String getFeedback(SubmittedProject project);
 }
