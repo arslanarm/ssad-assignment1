@@ -2,6 +2,10 @@ package moodle.modules;
 
 import moodle.datatypes.Course;
 import moodle.managers.*;
+import moodle.managers.abstractions.AccountManager;
+import moodle.managers.abstractions.CourseManager;
+import moodle.managers.abstractions.ProjectManager;
+import moodle.managers.abstractions.SubmittedProjectManager;
 
 import java.util.List;
 import java.util.Objects;

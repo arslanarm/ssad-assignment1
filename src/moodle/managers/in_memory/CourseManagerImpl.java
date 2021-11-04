@@ -1,6 +1,7 @@
-package moodle.managers;
+package moodle.managers.in_memory;
 
 import moodle.datatypes.Course;
+import moodle.managers.abstractions.CourseManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class CourseManagerImpl implements CourseManager {
 
     private final List<Course> courses = new ArrayList<>();
 
-    CourseManagerImpl() {
+    public CourseManagerImpl() {
     }
 
     /**

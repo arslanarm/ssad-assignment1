@@ -1,7 +1,8 @@
-package moodle.managers;
+package moodle.managers.in_memory;
 
 import moodle.datatypes.Course;
 import moodle.datatypes.Project;
+import moodle.managers.abstractions.ProjectManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
     List<Project> projects = new ArrayList<>();
 
-    ProjectManagerImpl() {
+    public ProjectManagerImpl() {
     }
 
     /**

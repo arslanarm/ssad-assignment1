@@ -1,5 +1,14 @@
 package moodle.managers;
 
+import moodle.managers.abstractions.AccountManager;
+import moodle.managers.abstractions.CourseManager;
+import moodle.managers.abstractions.ProjectManager;
+import moodle.managers.abstractions.SubmittedProjectManager;
+import moodle.managers.in_memory.AccountManagerImpl;
+import moodle.managers.in_memory.CourseManagerImpl;
+import moodle.managers.in_memory.ProjectManagerImpl;
+import moodle.managers.in_memory.SubmittedProjectManagerImpl;
+
 public class Repository {
     private Repository(){
 

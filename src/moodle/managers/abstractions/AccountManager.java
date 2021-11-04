@@ -1,4 +1,4 @@
-package moodle.managers;
+package moodle.managers.abstractions;
 
 import moodle.modules.Admin;
 import moodle.modules.Instructor;

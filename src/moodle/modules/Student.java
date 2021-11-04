@@ -4,6 +4,10 @@ import moodle.datatypes.Course;
 import moodle.datatypes.Project;
 import moodle.datatypes.SubmittedProject;
 import moodle.managers.*;
+import moodle.managers.abstractions.AccountManager;
+import moodle.managers.abstractions.CourseManager;
+import moodle.managers.abstractions.ProjectManager;
+import moodle.managers.abstractions.SubmittedProjectManager;
 
 import java.util.ArrayList;
 import java.util.List;

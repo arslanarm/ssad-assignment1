@@ -1,4 +1,4 @@
-package moodle.managers;
+package moodle.managers.abstractions;
 
 import moodle.datatypes.Course;
 import moodle.datatypes.Project;

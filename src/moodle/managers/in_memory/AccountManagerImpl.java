@@ -1,5 +1,6 @@
-package moodle.managers;
+package moodle.managers.in_memory;
 
+import moodle.managers.abstractions.AccountManager;
 import moodle.modules.Admin;
 import moodle.modules.Instructor;
 import moodle.modules.Module;
@@ -17,7 +18,7 @@ public class AccountManagerImpl implements AccountManager {
     private final Map<String, Module> modules = new HashMap<>();
     private final HashMap<Module, String> passwords = new HashMap<>();
 
-    AccountManagerImpl() {
+    public AccountManagerImpl() {
     }
 
 

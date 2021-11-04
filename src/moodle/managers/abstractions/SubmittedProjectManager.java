@@ -1,4 +1,4 @@
-package moodle.managers;
+package moodle.managers.abstractions;
 
 import moodle.datatypes.Project;
 import moodle.datatypes.SubmittedProject;

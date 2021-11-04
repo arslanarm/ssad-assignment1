@@ -1,7 +1,8 @@
-package moodle.managers;
+package moodle.managers.in_memory;
 
 import moodle.datatypes.Project;
 import moodle.datatypes.SubmittedProject;
+import moodle.managers.abstractions.SubmittedProjectManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
 
     private final List<SubmittedProject> submittedProjects = new ArrayList<>();
     private final HashMap<SubmittedProject, String> feedbackMap = new HashMap<>();
-    SubmittedProjectManagerImpl() {
+    public SubmittedProjectManagerImpl() {
     }
 
     /**
