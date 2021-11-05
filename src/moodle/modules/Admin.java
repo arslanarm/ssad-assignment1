@@ -17,11 +17,6 @@ import java.util.Objects;
 public class Admin implements Module {
     private final String email;
 
-    private static final AccountManager accountManager = Repository.INSTANCE.getAccountManager();
-    private final CourseManager courseManager = Repository.INSTANCE.getCourseManager();
-    private final ProjectManager projectManager = Repository.INSTANCE.getProjectManager();
-    private final SubmittedProjectManager submittedProjectManager = Repository.INSTANCE.getSubmittedProjectManager();
-
     public Admin(String email) {
         this.email = email;
     }
@@ -34,7 +29,7 @@ public class Admin implements Module {
      * @return Admin module/None
      */
     public static Admin login(String email, String password) {
-        Module module = accountManager.login(email, password);
+        Module module = Repository.INSTANCE.getAccountManager().login(email, password);
         if (module instanceof Admin) {
             return (Admin) module;
         }
@@ -69,7 +64,9 @@ public class Admin implements Module {
      * @return Student
      */
     public Student createStudent(String email, String password) {
-        return accountManager.createStudent(email, password);
+        Student student = new Student(email);
+        Repository.INSTANCE.getAccountManager().createModule(email, student, password);
+        return student;
     }
 
     /**
@@ -80,7 +77,9 @@ public class Admin implements Module {
      * @return Instructor
      */
     public Instructor createInstructor(String email, String password) {
-        return accountManager.createInstructor(email, password);
+        Instructor instructor = new Instructor(email);
+        Repository.INSTANCE.getAccountManager().createModule(email, instructor, password);
+        return instructor;
     }
 
     /**
@@ -92,7 +91,7 @@ public class Admin implements Module {
      * @return Course
      */
     public Course createCourse(String name, String instructorEmail, List<String> students) {
-        return courseManager.createCourse(instructorEmail, students, name);
+        return Repository.INSTANCE.getCourseManager().createCourse(instructorEmail, students, name);
     }
 
     // -------------Getters---------------
@@ -103,7 +102,9 @@ public class Admin implements Module {
      * @return Student
      */
     public Student getStudent(String email) {
-        return accountManager.getStudent(email);
+        Module module = Repository.INSTANCE.getAccountManager().getModule(email);
+        if (module instanceof Student) return (Student) module;
+        return null;
     }
 
     /**
@@ -113,7 +114,9 @@ public class Admin implements Module {
      * @return Instructor
      */
     public Instructor getInstructor(String email) {
-        return accountManager.getInstructor(email);
+        Module module = Repository.INSTANCE.getAccountManager().getModule(email);
+        if (module instanceof Instructor) return (Instructor) module;
+        return null;
     }
 
     /**
@@ -123,7 +126,7 @@ public class Admin implements Module {
      * @return Course
      */
     public Course getCourse(String name) {
-        return courseManager.getCourseByName(name);
+        return Repository.INSTANCE.getCourseManager().getCourseByName(name);
     }
 
     // -------------Removers---------------
@@ -133,7 +136,9 @@ public class Admin implements Module {
      * @param email email of student
      */
     public void removeStudent(String email) {
-        accountManager.removeStudent(accountManager.getStudent(email));
+        Module module = Repository.INSTANCE.getAccountManager().getModule(email);
+        if (!(module instanceof Student)) return;
+        Repository.INSTANCE.getAccountManager().removeModule(module);
     }
 
     /**
@@ -142,7 +147,9 @@ public class Admin implements Module {
      * @param email email of instructor
      */
     public void removeInstructor(String email) {
-        accountManager.removeInstructor(accountManager.getInstructor(email));
+        Module module = Repository.INSTANCE.getAccountManager().getModule(email);
+        if (!(module instanceof Instructor)) return;
+        Repository.INSTANCE.getAccountManager().removeModule(module);
     }
 
     /**
@@ -151,7 +158,7 @@ public class Admin implements Module {
      * @param name name of course
      */
     public void removeCourse(String name) {
-        courseManager.removeCourse(name);
+        Repository.INSTANCE.getCourseManager().removeCourse(name);
     }
 
     @Override
