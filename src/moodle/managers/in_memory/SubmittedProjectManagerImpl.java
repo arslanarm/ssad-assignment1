@@ -16,6 +16,8 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
 
     private final List<SubmittedProject> submittedProjects = new ArrayList<>();
     private final HashMap<SubmittedProject, String> feedbackMap = new HashMap<>();
+    private final HashMap<SubmittedProject, SubmittedProject.Snapshot> snapshotMap = new HashMap<>();
+
     public SubmittedProjectManagerImpl() {
     }
 
@@ -85,5 +87,24 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
     @Override
     public String getFeedback(SubmittedProject project) {
         return feedbackMap.get(project);
+    }
+
+    @Override
+    public void editSubmission(SubmittedProject submittedProject, String answer){
+        SubmittedProject.Snapshot snapshot = submittedProject.createSnapshot();
+        this.submittedProjects.remove(submittedProject);
+        SubmittedProject newProject = new SubmittedProject(submittedProject.getProject(), submittedProject.getStudent(), answer);
+        this.submittedProjects.add(newProject);
+        snapshotMap.put(newProject, snapshot);
+    }
+
+    @Override
+    public void undoSubmission(SubmittedProject submittedProject){
+        if (!snapshotMap.containsKey(submittedProject)){
+            return;
+        }
+        this.submittedProjects.remove(submittedProject);
+        this.submittedProjects.add(snapshotMap.get(submittedProject).getSubmittedProject());
+        snapshotMap.remove(submittedProject);
     }
 }

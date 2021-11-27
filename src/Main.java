@@ -10,8 +10,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Repository.INSTANCE.getAccountManager().createAdmin("test@test", "test");
-        Admin admin = Admin.login("test@test", "test");
+        Admin admin = new Admin("test@test");
+        Repository.INSTANCE.getAccountManager().createModule("test@test", admin, "test");
+        admin = Admin.login("test@test", "test");
         assert admin != null;
 
         // Admin creates instructor
@@ -30,6 +31,7 @@ public class Main {
         // Student submit project
         SubmittedProject submittedProject = student.submitProject(project, "That is a good task");
         System.out.println(submittedProject);
+        SubmittedProject submittedProject1 = student.
 
         // Instructor get projects
         List<SubmittedProject> projects = instructor.getSubmittedProjects(project);

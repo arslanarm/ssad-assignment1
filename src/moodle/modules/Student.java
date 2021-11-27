@@ -112,6 +112,10 @@ public class Student implements Module {
         return projects;
     }
 
+    public void removeSubmittedProject(SubmittedProject submittedProject) {
+        Repository.INSTANCE.getSubmittedProjectManager().removeSubmittedProject(submittedProject);
+    }
+
     /**
      * @return email of the student
      */

@@ -37,6 +37,8 @@ public class SubmittedProject {
         return answer;
     }
 
+
+
     /**
      * Method checks equality of 2 objects
      *
@@ -63,5 +65,28 @@ public class SubmittedProject {
                 ", student='" + student + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
+    }
+
+    public Snapshot createSnapshot() {
+        return new Snapshot(this);
+    }
+
+    public static class Snapshot {
+        private final Project project;
+        private final String student;
+        private final String answer;
+        Snapshot(SubmittedProject submittedProject) {
+            this.project = submittedProject.project;
+            this.student = submittedProject.student;
+            this.answer = submittedProject.answer;
+        }
+
+        public SubmittedProject getSubmittedProject() {
+            return new SubmittedProject(
+                    project,
+                    student,
+                    answer
+            );
+        }
     }
 }

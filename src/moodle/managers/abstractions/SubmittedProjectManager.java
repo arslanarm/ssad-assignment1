@@ -54,4 +54,9 @@ public interface SubmittedProjectManager {
      * @return feedback
      */
     public String getFeedback(SubmittedProject project);
+
+
+    public void undoSubmission(SubmittedProject submittedProject);
+
+    public void editSubmission(SubmittedProject submittedProject, String answer);
 }
