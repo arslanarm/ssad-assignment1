@@ -90,21 +90,24 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
     }
 
     @Override
-    public void editSubmission(SubmittedProject submittedProject, String answer){
+    public SubmittedProject editSubmission(SubmittedProject submittedProject, String answer){
         SubmittedProject.Snapshot snapshot = submittedProject.createSnapshot();
         this.submittedProjects.remove(submittedProject);
         SubmittedProject newProject = new SubmittedProject(submittedProject.getProject(), submittedProject.getStudent(), answer);
         this.submittedProjects.add(newProject);
         snapshotMap.put(newProject, snapshot);
+        return newProject;
     }
 
     @Override
-    public void undoSubmission(SubmittedProject submittedProject){
+    public SubmittedProject undoSubmission(SubmittedProject submittedProject){
         if (!snapshotMap.containsKey(submittedProject)){
-            return;
+            return submittedProject;
         }
         this.submittedProjects.remove(submittedProject);
-        this.submittedProjects.add(snapshotMap.get(submittedProject).getSubmittedProject());
+        SubmittedProject project = snapshotMap.get(submittedProject).getSubmittedProject();
+        this.submittedProjects.add(project);
         snapshotMap.remove(submittedProject);
+        return project;
     }
 }

@@ -31,11 +31,15 @@ public class Main {
         // Student submit project
         SubmittedProject submittedProject = student.submitProject(project, "That is a good task");
         System.out.println(submittedProject);
-        SubmittedProject submittedProject1 = student.
+        SubmittedProject submittedProject1 = student.editSubmittedProject(submittedProject, "Edited answer");
+        System.out.println(submittedProject1);
+        SubmittedProject submittedProject2 = student.undo(submittedProject1);
+        System.out.println(submittedProject2);
 
         // Instructor get projects
         List<SubmittedProject> projects = instructor.getSubmittedProjects(project);
         System.out.println(projects);
+
 
         // Instructor upload feedback
         instructor.uploadFeedback(submittedProject, "Agree");

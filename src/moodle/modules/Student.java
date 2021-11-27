@@ -15,6 +15,7 @@ import java.util.Objects;
 
 public class Student implements Module {
     private final String email;
+
     public Student(String email) {
         this.email = email;
     }
@@ -22,7 +23,7 @@ public class Student implements Module {
     /**
      * The method allows the student to log in to the system.
      *
-     * @param email student email
+     * @param email    student email
      * @param password student password
      * @return Student module / none
      */
@@ -81,7 +82,7 @@ public class Student implements Module {
      * The method allow submitting project
      *
      * @param project Project for submitting
-     * @param answer Answer of the project
+     * @param answer  Answer of the project
      * @return Submitted Project
      */
     public SubmittedProject submitProject(Project project, String answer) {
@@ -114,6 +115,15 @@ public class Student implements Module {
 
     public void removeSubmittedProject(SubmittedProject submittedProject) {
         Repository.INSTANCE.getSubmittedProjectManager().removeSubmittedProject(submittedProject);
+    }
+
+    public SubmittedProject editSubmittedProject(SubmittedProject submittedProject, String answer) {
+        return Repository.INSTANCE.getSubmittedProjectManager().editSubmission(submittedProject, answer);
+
+    }
+
+    public SubmittedProject undo(SubmittedProject submittedProject) {
+        return Repository.INSTANCE.getSubmittedProjectManager().undoSubmission(submittedProject);
     }
 
     /**
