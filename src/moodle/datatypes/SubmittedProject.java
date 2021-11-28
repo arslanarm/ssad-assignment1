@@ -66,11 +66,22 @@ public class SubmittedProject {
                 ", answer='" + answer + '\'' +
                 '}';
     }
-
+    /**
+     * Method creates snapshot of the answer
+     *
+     * @return Snapshot of the submitted project
+     */
     public Snapshot createSnapshot() {
         return new Snapshot(this);
     }
 
+
+    /**
+     *  Class snapshot stores all the required data to
+     *  create submitted project object in case if some of its
+     *  previous versions needed
+     *
+     */
     public static class Snapshot {
         private final Project project;
         private final String student;

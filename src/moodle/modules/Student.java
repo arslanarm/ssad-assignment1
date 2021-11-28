@@ -113,15 +113,35 @@ public class Student implements Module {
         return projects;
     }
 
+    /**
+     * The method removes project of the course for the student
+     *
+     * @param submittedProject project to remove
+     */
     public void removeSubmittedProject(SubmittedProject submittedProject) {
         Repository.INSTANCE.getSubmittedProjectManager().removeSubmittedProject(submittedProject);
     }
 
+
+    /**
+     * The method changes answer of submitted project for the student
+     *
+     * @param submittedProject project to alter
+     * @param answer new answer
+     * @return edited submittedProject object
+     */
     public SubmittedProject editSubmittedProject(SubmittedProject submittedProject, String answer) {
         return Repository.INSTANCE.getSubmittedProjectManager().editSubmission(submittedProject, answer);
 
     }
 
+
+    /**
+     * The method recovers the initial version of submitted project from snapshot
+     *
+     * @param submittedProject project to undo
+     * @return recovered submittedProject object
+     */
     public SubmittedProject undo(SubmittedProject submittedProject) {
         return Repository.INSTANCE.getSubmittedProjectManager().undoSubmission(submittedProject);
     }

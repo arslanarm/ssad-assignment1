@@ -89,6 +89,13 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
         return feedbackMap.get(project);
     }
 
+    /**
+     * This method allows to alter the answer of the submitted project
+     *
+     * @param submittedProject project to be edited
+     * @param answer answer that will replace previous answer
+     * @return new object with given answer
+     */
     @Override
     public SubmittedProject editSubmission(SubmittedProject submittedProject, String answer){
         SubmittedProject.Snapshot snapshot = submittedProject.createSnapshot();
@@ -99,6 +106,14 @@ public class SubmittedProjectManagerImpl implements SubmittedProjectManager {
         return newProject;
     }
 
+
+    /**
+     * This method allows to undo the submission of the project,
+     * bringing it to the initial from taken from snapshot
+     *
+     * @param submittedProject project to be edited
+     * @return new submittedProject object generated from snapshot
+     */
     @Override
     public SubmittedProject undoSubmission(SubmittedProject submittedProject){
         if (!snapshotMap.containsKey(submittedProject)){
